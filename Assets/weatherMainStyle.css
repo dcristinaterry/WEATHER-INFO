@@ -1,0 +1,47 @@
+
+header{
+    background-color: rgb(61, 58, 58);
+    color: white;
+    margin: 0;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    
+    text-align: center;
+}
+
+#headerID{
+    margin: 0;
+
+}
+
+section{
+    margin: 0;
+}
+
+.container-fluid{
+    height: 50%;
+    
+}
+
+.row{
+    height: 50%;
+}
+#col1{
+    background-color: aqua;
+    
+   
+}
+
+#col2{
+    background-color: blueviolet;
+  
+}
+ .dayForecast{
+     width: 18%;
+     background-color: royalblue;
+     margin: 1%;
+ }
+
+ #mainDashboard{
+     margin-top: 2%;
+ }
