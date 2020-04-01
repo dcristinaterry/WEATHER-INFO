@@ -1,9 +1,17 @@
 $(document).ready(function () {
 
+    // const currentTime = new Date();
 
-    // create a form and ask for the city name
+    // console.log('currentTime', currentTime);
 
-    
+    var currenTime = moment().format("(MM/DD/YYYY)")
+    // var currentHour = moment().format('HH');
+     console.log("current hour:   " + currenTime);
+    // // create a form and ask for the city name
+
+
+    //get last information
+
 
     $("#getWeather").click(function (event) {
 
@@ -12,6 +20,9 @@ $(document).ready(function () {
         var myCity = $("#searchInfo").val();
         console.log(myCity);
         ajaxCalls(myCity);
+        //add local storage
+        // add to the buttons.
+        
 
     })
 
@@ -33,6 +44,7 @@ $(document).ready(function () {
         // the humidity, => main humidity
         // the wind speed,  => wind
         // and the UV index  >> change colors  Lat and long
+        
         var myTemperature;
         var myHumidity;
         var myWindSpeed;
@@ -41,7 +53,7 @@ $(document).ready(function () {
         // http://openweathermap.org/img/wn/01d@2x.png
         var myLat;
         var myLon;
-        
+        $("#city").text(city + " " + currenTime);
         // Here we run our AJAX call to the OpenWeatherMap API
         $.ajax({
             url: queryURL,
@@ -51,12 +63,15 @@ $(document).ready(function () {
                 console.log(response);
 
                 myTemperature = response.main.temp;
+                $("#temperature").text("Temperature: " + myTemperature + " F");
                 console.log(myTemperature)
 
                 myHumidity = response.main.humidity;
+                $("#humidity").text("Humidity: " + myHumidity + "%") ;
                 console.log(myHumidity)
 
                 myWindSpeed = response.wind.speed;
+                $("#windspeed").text("Wind Speed: " + myWindSpeed +" MPH");
                 console.log(myWindSpeed)
 
                 myLat = response.coord.lat;
@@ -66,8 +81,11 @@ $(document).ready(function () {
                 console.log(myLon)
                  
                 myIcon = response.weather[0].icon;
+                var imageUrl = "http://openweathermap.org/img/wn/"+ myIcon + "@2x.png"
+                $("#cityImage").attr("src", imageUrl);
                 console.log(myIcon);
-                
+
+
                 var queryURLUV = "http://api.openweathermap.org/data/2.5/uvi?appid="+apiKey+"&lat="+myLat+"&lon="+myLon;
 
 
@@ -77,8 +95,19 @@ $(document).ready(function () {
                 }).then(function(uvResponse){
                     console.log(uvResponse)
                     myUvIndex = uvResponse.value;
-                })
 
+                    if(myUvIndex>7){
+                        $("#uvvalue").addClass("uvred");
+                    }
+                    if(myUvIndex>2 && myUvIndex<8){
+                        $("#uvvalue").addClass("uvyellow");
+                    }
+                    if(myUvIndex<3){
+                        $("#uvvalue").addClass("uvgreen");
+                    }
+    
+                    $("#uvvalue").text(myUvIndex);  
+                })
 
 
 
@@ -102,12 +131,20 @@ $(document).ready(function () {
                     if(data.list[i].dt_txt.indexOf("12:00:00")!== -1){
                         console.log(data.list[i]);
 
-                        // create the structure dynamycaly 
+                    //    var div1 = $("<div>")
                     }
 
                 }
 
             })
+
+
+      
+
+
+
+
+
 
     }
 

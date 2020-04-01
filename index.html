@@ -29,54 +29,66 @@
 
         <div class="row">
 
-            <div id="col1" class="col-sm-6 col-md-3 ">
+
+            <!-- col 1 - display Buttons -->
+            <div id="col1" class="col-sm-6 col-md-4 ">
 
                 <form>
-                  
 
                     <div class="form-group">
-                        <input  id="searchInfo" class="form-control form-control-lg" type="text" placeholder=".form-control-lg">
+                        <input id="searchInfo" class="form-control form-control-lg" type="text"
+                            placeholder=".form-control-lg">
                         <button id="getWeather" type="submit" class="btn btn-primary">Submit</button>
                     </div>
-               
-                    
-                  </form>
-                
+
+
+                </form>
+
 
             </div>
 
-            <!-- col2 -->
-            <div id="col2" class="col-sm-6 col-md-9 ">
 
-                <!-- row1 -->
+            <!-- col2 -->
+            <div id="col2" class="col-sm-6 col-md-8 ">
+
+                <!-- row1 main weather-->
                 <div id="mainDashboard" class="card" style="width: 100%">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                        <p class="card-text">Some quick example text to build on the card title and make up the
-                            bulk of
-                            the card's content.</p>
+                        <div id="weathertitle"> 
+                            <h2 id="city">City
+                                
+                            </h2>
+                            <img id="cityImage">
+                            
+                        </div>
+                        <p id="temperature">Temperature:</p>
+                        <p id="humidity">Humidity:</p>
+                        <p id="windspeed">Wind Speed:</p>
+                        <p id="uv">UV index:<span id="uvvalue"></span> </p>
+
 
                     </div>
                 </div>
 
                 <div>
-                    <!-- row 2 -->
-                    <div>
-                        <p>5-Day Forecast</p>
+                    <!-- row 2  forecast -->
+                    <div id="forecastTitle">
+                        <h2>5-Day Forecast</h2>
                     </div>
                     <!-- box1 -->
                     <div class="row">
-                        <div class="dayForecast">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Special title treatment</h5>
-                                    <p class="card-text">With supporting text below as a natural lead-in to
-                                        additional
-                                        content.</p>
 
+
+
+                        <div class="dayForecast">
+                            <div class="card text-white bg-primary ">
+                                <div class="card-body">
+                                  <h5 class="card-title"></h5>
+                                  <img>
+                                    <p id="temperature-1"></p>
+                                    <p id="humidity-1"></p>
                                 </div>
-                            </div>
+                              </div>
                         </div>
 
                         <!-- box2 -->
@@ -143,7 +155,7 @@
 
     <script type="text/javascript">
 
-       
+
     </script>
 
 
@@ -161,6 +173,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 </body>
 
 </html>
