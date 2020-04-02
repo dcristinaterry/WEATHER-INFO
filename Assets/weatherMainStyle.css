@@ -15,8 +15,8 @@ header{
 }
 
 section{
-    margin: 0;
-    
+   
+    margin-top: 2%;
 
 }
 
@@ -31,10 +31,10 @@ section{
  }
 
  #mainDashboard{
-     margin-top: 2%;
+    
      line-height: 1cm;
  }
-
+ 
 
  .uvred{
     background-color: red;

@@ -6,7 +6,7 @@ $(document).ready(function () {
 
     var currenTime = moment().format("(MM/DD/YYYY)")
     // var currentHour = moment().format('HH');
-     console.log("current hour:   " + currenTime);
+    console.log("current hour:   " + currenTime);
     // // create a form and ask for the city name
 
 
@@ -22,13 +22,13 @@ $(document).ready(function () {
         ajaxCalls(myCity);
         //add local storage
         // add to the buttons.
-        
+
 
     })
 
 
 
-    function ajaxCalls(city){
+    function ajaxCalls(city) {
 
         var apiKey = "9bd3bf6fe4a1fb99bfc30f6487a298d3";
         //  city = "Orlando, Florida"
@@ -44,7 +44,7 @@ $(document).ready(function () {
         // the humidity, => main humidity
         // the wind speed,  => wind
         // and the UV index  >> change colors  Lat and long
-        
+
         var myTemperature;
         var myHumidity;
         var myWindSpeed;
@@ -67,11 +67,11 @@ $(document).ready(function () {
                 console.log(myTemperature)
 
                 myHumidity = response.main.humidity;
-                $("#humidity").text("Humidity: " + myHumidity + "%") ;
+                $("#humidity").text("Humidity: " + myHumidity + "%");
                 console.log(myHumidity)
 
                 myWindSpeed = response.wind.speed;
-                $("#windspeed").text("Wind Speed: " + myWindSpeed +" MPH");
+                $("#windspeed").text("Wind Speed: " + myWindSpeed + " MPH");
                 console.log(myWindSpeed)
 
                 myLat = response.coord.lat;
@@ -79,34 +79,34 @@ $(document).ready(function () {
 
                 myLon = response.coord.lon;
                 console.log(myLon)
-                 
+
                 myIcon = response.weather[0].icon;
-                var imageUrl = "http://openweathermap.org/img/wn/"+ myIcon + "@2x.png"
+                var imageUrl = "http://openweathermap.org/img/wn/" + myIcon + "@2x.png"
                 $("#cityImage").attr("src", imageUrl);
                 console.log(myIcon);
 
 
-                var queryURLUV = "http://api.openweathermap.org/data/2.5/uvi?appid="+apiKey+"&lat="+myLat+"&lon="+myLon;
+                var queryURLUV = "http://api.openweathermap.org/data/2.5/uvi?appid=" + apiKey + "&lat=" + myLat + "&lon=" + myLon;
 
 
                 $.ajax({
                     url: queryURLUV,
                     method: "GET"
-                }).then(function(uvResponse){
+                }).then(function (uvResponse) {
                     console.log(uvResponse)
                     myUvIndex = uvResponse.value;
 
-                    if(myUvIndex>7){
+                    if (myUvIndex > 7) {
                         $("#uvvalue").addClass("uvred");
                     }
-                    if(myUvIndex>2 && myUvIndex<8){
+                    if (myUvIndex > 2 && myUvIndex < 8) {
                         $("#uvvalue").addClass("uvyellow");
                     }
-                    if(myUvIndex<3){
+                    if (myUvIndex < 3) {
                         $("#uvvalue").addClass("uvgreen");
                     }
-    
-                    $("#uvvalue").text(myUvIndex);  
+
+                    $("#uvvalue").text(myUvIndex);
                 })
 
 
@@ -116,30 +116,79 @@ $(document).ready(function () {
 
 
 
-            $.ajax({
-                url: queryURLForecast,
-                method: "GET"
+        $.ajax({
+            url: queryURLForecast,
+            method: "GET"
 
-            }).then(function(data){
+        }).then(function (data) {
 
-                // console.log(data)
+             console.log(data)
+            j=1;
+            for (var i = 0; i < data.list.length; i++) {
+                var mydataHour = data.list[i].dt_txt;
                
-                for(var i=0 ; i< data.list.length ; i++){
-                    //var myHour = data.list[i].dt_txt;
+                // console.log(mydataHour)
+                // console.log(data.list[i].dt_txt.indexOf("12:00:00"));
+                    
+                if (data.list[i].dt_txt.indexOf("12:00:00") !== -1) {
+                    console.log(j)
+                    var datatemperature = data.list[i].main.temp;
+                    console.log(datatemperature);
+                    var datahumidity = data.list[i].main.humidity;
+                    console.log(datahumidity)
+                    var dataImage = data.list[i].weather[0].icon;
+                    console.log(dataImage)
+                    var dataDate = data.list[i].dt_txt;
+                    console.log(dataDate)
+
+                    j++;
+               
+                    var div1 = $("<div>")
+                    div1.addClass("dayForecast");
+                    div1.attr("id",i);
+                    $("#row2").append(div1);
+
+                    var div2 = $("<div>")
+                    div2.addClass("card");
+                    div2.addClass("text-white");
+                    div2.addClass("bg-primary");
+                    div1.append(div2);
+
+                    var div3 = $("<div>")
+                    div3.addClass("card-body");
+                    div2.append(div3);
+
+                    var header1 = $("<h5>");
+                    header1.addClass("car-title");
+                    header1.text("just testing" + i);
+                    div3.append(header1);
 
 
-                    if(data.list[i].dt_txt.indexOf("12:00:00")!== -1){
-                        console.log(data.list[i]);
+                    var imageBox = $("<img>");
+                    var imageUrl = "http://openweathermap.org/img/wn/" + dataImage + ".png"
 
-                    //    var div1 = $("<div>")
-                    }
+                    imageBox.attr("src", imageUrl);//do
+                    div3.append(imageBox);
+
+                    var p1 = $("<p>")
+                    p1.text("Temp: " + datatemperature + " F")
+                    div3.append(p1);
+                    // text
+
+                    var p2 = $("<p>")
+                    p2.text("Humidity: " + datahumidity +"%")
+                    div3.append(p2);
+                    // text
+
 
                 }
 
-            })
+            }
+
+        })
 
 
-      
+
 
 
 
@@ -150,7 +199,7 @@ $(document).ready(function () {
 
 
 
-    
+
 
 
 });
