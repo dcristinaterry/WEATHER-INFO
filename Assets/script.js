@@ -59,6 +59,8 @@ $(document).ready(function () {
         ajaxCalls(myCity);
         $("#searchInfo").val("");
         //add local storage
+
+        if(val !==null){
         if (myLocalStorageCity === null) {
             myLocalStorageCity = [myCity];
 
@@ -71,7 +73,7 @@ $(document).ready(function () {
         // add to the buttons.
         newButtonCity(myCity);
 
-
+        }
 
 
 
