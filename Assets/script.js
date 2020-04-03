@@ -149,12 +149,12 @@ $(document).ready(function () {
                 console.log(myLon)
 
                 myIcon = response.weather[0].icon;
-                var imageUrl = "http://openweathermap.org/img/wn/" + myIcon + "@2x.png"
+                var imageUrl = "https://openweathermap.org/img/wn/" + myIcon + "@2x.png"
                 $("#cityImage").attr("src", imageUrl);
                 console.log(myIcon);
 
 
-                var queryURLUV = "http://api.openweathermap.org/data/2.5/uvi?appid=" + apiKey + "&lat=" + myLat + "&lon=" + myLon;
+                var queryURLUV = "https://api.openweathermap.org/data/2.5/uvi?appid=" + apiKey + "&lat=" + myLat + "&lon=" + myLon;
 
 
                 $.ajax({
