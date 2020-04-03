@@ -8,20 +8,70 @@ $(document).ready(function () {
     // var currentHour = moment().format('HH');
     console.log("current hour:   " + currenTime);
     // // create a form and ask for the city name
-
+    var cityNotFound =false;
+    var myLocalStorageCity = JSON.parse(localStorage.getItem("city"));
 
     //get last information
+
+
+    function loadCities(){
+        if(myLocalStorageCity!== null){
+            for(var i=0; i<myLocalStorageCity.length;i++){      
+                newButtonCity(myLocalStorageCity[i]);
+            }
+        }
+    }
+    loadCities();
+
+
+    function newButtonCity(cityname){
+        var newBttn = $("<button>");
+                newBttn.addClass("btn");
+                newBttn.addClass("btn-light");
+                newBttn.addClass("w-75");
+                newBttn.addClass("border");
+                newBttn.addClass("cityButton");
+                newBttn.text(cityname);
+                newBttn.attr("id", cityname)  
+                $("#col1").append(newBttn);
+    }
+
+
+
+
+    $(".cityButton").click(function(event){
+        $("#row2").empty();
+        var myid = $(this).attr("id");
+        console.log("this is myID: " + myid);
+        ajaxCalls(myid);
+    })
 
 
     $("#getWeather").click(function (event) {
 
         event.preventDefault();
+        $("#row2").empty();
+        
 
         var myCity = $("#searchInfo").val();
         console.log(myCity);
         ajaxCalls(myCity);
+        $("#searchInfo").val("");
         //add local storage
+        if(myLocalStorageCity===null){
+            myLocalStorageCity=[myCity];
+            
+
+        }else{
+            myLocalStorageCity.push(myCity);
+        }
+        localStorage.setItem("city", JSON.stringify(myLocalStorageCity));
+       
         // add to the buttons.
+        newButtonCity(myCity);
+
+        
+        
 
 
     })
@@ -39,7 +89,7 @@ $(document).ready(function () {
 
         var queryURLForecast = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=" + apiKey;
 
-
+       
         // the temperature, => main temp
         // the humidity, => main humidity
         // the wind speed,  => wind
@@ -53,11 +103,29 @@ $(document).ready(function () {
         // http://openweathermap.org/img/wn/01d@2x.png
         var myLat;
         var myLon;
+
+        var city = city.charAt(0).toUpperCase() + city.slice(1);
+        
+     
+        
+
         $("#city").text(city + " " + currenTime);
+
+
         // Here we run our AJAX call to the OpenWeatherMap API
         $.ajax({
             url: queryURL,
-            method: "GET"
+            method: "GET",
+
+            error : function(jqXHR, textStatus, errorThrown) { 
+                if(jqXHR.status == 404 || errorThrown == 'Not Found') 
+                { 
+                    cityNotFound=true;
+                    alert("City not Found")
+                    console.log('There was a 404 error. Please try again.'); 
+                }
+            }
+
         }).
             then(function (response) {
                 console.log(response);
@@ -140,7 +208,7 @@ $(document).ready(function () {
                     console.log(dataImage)
                     var dataDate = data.list[i].dt_txt;
                     console.log(dataDate)
-
+                    var parsedDate = moment.parseZone(dataDate).format("MM/DD/YYYY");
                     j++;
                
                     var div1 = $("<div>")
@@ -160,8 +228,9 @@ $(document).ready(function () {
 
                     var header1 = $("<h5>");
                     header1.addClass("car-title");
-                    header1.text("just testing" + i);
+                    header1.text(parsedDate);
                     div3.append(header1);
+
 
 
                     var imageBox = $("<img>");

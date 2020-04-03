@@ -29,7 +29,13 @@ section{
      margin: 1%;
      /* background-color: #007bff; */
  }
+ #formCity {
+    padding: 0;
+ }
 
+ #searchInfo{
+     float: left;
+ }
  #mainDashboard{
     
      line-height: 1cm;
@@ -49,4 +55,12 @@ section{
 .uvgreen{
     background-color: yellow;
     padding: 1%;
+}
+
+#city{
+   display: inline;
+   padding-top: 2%;
+}
+#cityImage{
+    padding-bottom: 30px;
 }
