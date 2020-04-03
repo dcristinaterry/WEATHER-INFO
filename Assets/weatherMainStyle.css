@@ -64,3 +64,9 @@ section{
 #cityImage{
     padding-bottom: 30px;
 }
+
+@media screen and (max-width: 1440px) {
+    .dayForecast {
+      width: 40%;
+    }
+  }
