@@ -8,15 +8,15 @@ $(document).ready(function () {
     // var currentHour = moment().format('HH');
     console.log("current hour:   " + currenTime);
     // // create a form and ask for the city name
-    var cityNotFound =false;
+    var cityNotFound = false;
     var myLocalStorageCity = JSON.parse(localStorage.getItem("city"));
 
     //get last information
 
 
-    function loadCities(){
-        if(myLocalStorageCity!== null){
-            for(var i=0; i<myLocalStorageCity.length;i++){      
+    function loadCities() {
+        if (myLocalStorageCity !== null) {
+            for (var i = 0; i < myLocalStorageCity.length; i++) {
                 newButtonCity(myLocalStorageCity[i]);
             }
         }
@@ -24,22 +24,23 @@ $(document).ready(function () {
     loadCities();
 
 
-    function newButtonCity(cityname){
+    function newButtonCity(cityname) {
         var newBttn = $("<button>");
-                newBttn.addClass("btn");
-                newBttn.addClass("btn-light");
-                newBttn.addClass("w-75");
-                newBttn.addClass("border");
-                newBttn.addClass("cityButton");
-                newBttn.text(cityname);
-                newBttn.attr("id", cityname)  
-                $("#col1").append(newBttn);
+        newBttn.addClass("btn");
+        newBttn.addClass("btn-light");
+        newBttn.addClass("w-75");
+        newBttn.addClass("border");
+        newBttn.addClass("cityButton");
+        var name = cityname.charAt(0).toUpperCase() + cityname.slice(1);
+        newBttn.text(name);
+        newBttn.attr("id", name)
+        $("#col1").append(newBttn);
     }
 
 
 
 
-    $(".cityButton").click(function(event){
+    $(".cityButton").click(function (event) {
         $("#row2").empty();
         var myid = $(this).attr("id");
         console.log("this is myID: " + myid);
@@ -51,27 +52,27 @@ $(document).ready(function () {
 
         event.preventDefault();
         $("#row2").empty();
-        
+
 
         var myCity = $("#searchInfo").val();
         console.log(myCity);
         ajaxCalls(myCity);
         $("#searchInfo").val("");
         //add local storage
-        if(myLocalStorageCity===null){
-            myLocalStorageCity=[myCity];
-            
+        if (myLocalStorageCity === null) {
+            myLocalStorageCity = [myCity];
 
-        }else{
+
+        } else {
             myLocalStorageCity.push(myCity);
         }
         localStorage.setItem("city", JSON.stringify(myLocalStorageCity));
-       
+
         // add to the buttons.
         newButtonCity(myCity);
 
-        
-        
+
+
 
 
     })
@@ -89,7 +90,7 @@ $(document).ready(function () {
 
         var queryURLForecast = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=" + apiKey;
 
-       
+
         // the temperature, => main temp
         // the humidity, => main humidity
         // the wind speed,  => wind
@@ -105,9 +106,9 @@ $(document).ready(function () {
         var myLon;
 
         var city = city.charAt(0).toUpperCase() + city.slice(1);
-        
-     
-        
+
+
+
 
         $("#city").text(city + " " + currenTime);
 
@@ -117,12 +118,11 @@ $(document).ready(function () {
             url: queryURL,
             method: "GET",
 
-            error : function(jqXHR, textStatus, errorThrown) { 
-                if(jqXHR.status == 404 || errorThrown == 'Not Found') 
-                { 
-                    cityNotFound=true;
+            error: function (jqXHR, textStatus, errorThrown) {
+                if (jqXHR.status == 404 || errorThrown == 'Not Found') {
+                    cityNotFound = true;
                     alert("City not Found")
-                    console.log('There was a 404 error. Please try again.'); 
+                    console.log('There was a 404 error. Please try again.');
                 }
             }
 
@@ -190,14 +190,14 @@ $(document).ready(function () {
 
         }).then(function (data) {
 
-             console.log(data)
-            j=1;
+            console.log(data)
+            j = 1;
             for (var i = 0; i < data.list.length; i++) {
                 var mydataHour = data.list[i].dt_txt;
-               
+
                 // console.log(mydataHour)
                 // console.log(data.list[i].dt_txt.indexOf("12:00:00"));
-                    
+
                 if (data.list[i].dt_txt.indexOf("12:00:00") !== -1) {
                     console.log(j)
                     var datatemperature = data.list[i].main.temp;
@@ -210,10 +210,10 @@ $(document).ready(function () {
                     console.log(dataDate)
                     var parsedDate = moment.parseZone(dataDate).format("MM/DD/YYYY");
                     j++;
-               
+
                     var div1 = $("<div>")
                     div1.addClass("dayForecast");
-                    div1.attr("id",i);
+                    div1.attr("id", i);
                     $("#row2").append(div1);
 
                     var div2 = $("<div>")
@@ -245,7 +245,7 @@ $(document).ready(function () {
                     // text
 
                     var p2 = $("<p>")
-                    p2.text("Humidity: " + datahumidity +"%")
+                    p2.text("Humidity: " + datahumidity + "%")
                     div3.append(p2);
                     // text
 
