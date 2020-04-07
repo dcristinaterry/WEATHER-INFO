@@ -9,7 +9,7 @@ $(document).ready(function () {
     console.log("current hour:   " + currenTime);
     // // create a form and ask for the city name
     var cityNotFound = false;
-
+    
     var myLocalStorageCity = JSON.parse(localStorage.getItem("city"));
 
     //get last information
@@ -61,7 +61,7 @@ $(document).ready(function () {
         $("#searchInfo").val("");
         //add local storage
 
-        
+        if(myCity !==null){
         if (myLocalStorageCity === null) {
             myLocalStorageCity = [myCity];
 
@@ -74,7 +74,7 @@ $(document).ready(function () {
         // add to the buttons.
         newButtonCity(myCity);
 
-        
+        }
 
 
 
