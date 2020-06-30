@@ -25,6 +25,7 @@ $(document).ready(function () {
     loadCities();
 
 
+
     function newButtonCity(cityname) {
         var newBttn = $("<button>");
         newBttn.addClass("btn");
@@ -35,10 +36,14 @@ $(document).ready(function () {
         var name = cityname.charAt(0).toUpperCase() + cityname.slice(1);
         newBttn.text(name);
         newBttn.attr("id", name)
-        $("#col1").append(newBttn);
+        $("#cities").append(newBttn);
     }
 
+    $("#clearAll").click(function (){
+        myLocalStorageCity = null;
+        localStorage.setItem("city", null);
 
+    })
 
 
     $(".cityButton").click(function (event) {
@@ -73,9 +78,9 @@ $(document).ready(function () {
 
         // add to the buttons.
         newButtonCity(myCity);
-
         }
-
+       
+    
 
 
     })
@@ -258,20 +263,5 @@ $(document).ready(function () {
             }
 
         })
-
-
-
-
-
-
-
-
-
     }
-
-
-
-
-
-
 });
