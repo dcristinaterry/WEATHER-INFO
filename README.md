@@ -1,7 +1,6 @@
-# H6-WEATHER-INFO
+# WEATHER-INFO
 
-Thank you for visitin my weather-app.  With this application you will be able to find a citie's 5 day weather cast
-
+Thank you for visitin my Weather-App.  With this application you will be able to check the weather for a City and have a 5 day wheather cast.
 
 ## Screen shots / gifs
 
