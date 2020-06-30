@@ -20,6 +20,10 @@ $(document).ready(function () {
             for (var i = 0; i < myLocalStorageCity.length; i++) {
                 newButtonCity(myLocalStorageCity[i]);
             }
+            $("#clearAll").show()
+            
+        }else{
+            $("#clearAll").hide()
         }
     }
     loadCities();
