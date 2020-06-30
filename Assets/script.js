@@ -24,8 +24,6 @@ $(document).ready(function () {
     }
     loadCities();
 
-
-
     function newButtonCity(cityname) {
         var newBttn = $("<button>");
         newBttn.addClass("btn");
@@ -42,7 +40,8 @@ $(document).ready(function () {
     $("#clearAll").click(function (){
         myLocalStorageCity = null;
         localStorage.setItem("city", null);
-
+        location.reload();
+        return false;
     })
 
 
