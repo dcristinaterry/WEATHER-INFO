@@ -9,7 +9,7 @@ $(document).ready(function () {
     console.log("current hour:   " + currenTime);
     // // create a form and ask for the city name
     var cityNotFound = false;
-    
+
     var myLocalStorageCity = JSON.parse(localStorage.getItem("city"));
 
     //get last information
@@ -25,6 +25,7 @@ $(document).ready(function () {
     loadCities();
 
     function newButtonCity(cityname) {
+
         var newBttn = $("<button>");
         newBttn.addClass("btn");
         newBttn.addClass("btn-light");
@@ -37,7 +38,7 @@ $(document).ready(function () {
         $("#cities").append(newBttn);
     }
 
-    $("#clearAll").click(function (){
+    $("#clearAll").click(function () {
         myLocalStorageCity = null;
         localStorage.setItem("city", null);
         location.reload();
@@ -61,32 +62,37 @@ $(document).ready(function () {
 
         var myCity = $("#searchInfo").val();
         console.log(myCity);
-        ajaxCalls(myCity);
-        $("#searchInfo").val("");
+
+        
         //add local storage
+        if (myCity !== "") {
+            ajaxCalls(myCity, function () {
+                if (!cityNotFound) {
+                    if (myLocalStorageCity === null) {
+                        myLocalStorageCity = [myCity];
 
-        if(myCity !==null){
-        if (myLocalStorageCity === null) {
-            myLocalStorageCity = [myCity];
 
+                    } else {
+                        myLocalStorageCity.push(myCity);
+                    }
+                    // save to local Storage
+                    localStorage.setItem("city", JSON.stringify(myLocalStorageCity));
 
-        } else {
-            myLocalStorageCity.push(myCity);
+                    // add to the buttons.
+                    newButtonCity(myCity);
+                }
+
+            });
+
         }
-        localStorage.setItem("city", JSON.stringify(myLocalStorageCity));
 
-        // add to the buttons.
-        newButtonCity(myCity);
-        }
-       
-    
 
 
     })
 
 
 
-    function ajaxCalls(city) {
+    function ajaxCalls(city, cb) {
 
         var apiKey = "9bd3bf6fe4a1fb99bfc30f6487a298d3";
         //  city = "Orlando, Florida"
@@ -262,5 +268,6 @@ $(document).ready(function () {
             }
 
         })
+        cb();
     }
 });
