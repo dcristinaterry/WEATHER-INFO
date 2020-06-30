@@ -1,6 +1,6 @@
 # WEATHER-INFO
 
-Thank you for visiting my Weather-App.  With this application you will be able to check the weather for a City and have a 5 day wheather cast.
+Thank you for visiting my Weather-App.  With this application you will be able to check the weather for a City and have a 5 day weathercast.
 
 ## Screen shots / gifs
 
