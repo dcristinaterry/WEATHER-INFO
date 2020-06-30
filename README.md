@@ -7,11 +7,11 @@ Thank you for visitin my weather-app.  With this application you will be able to
 
 ![weatherApp](./Assets/ScreenS1.png)
 
-## GettingStarted
-
-GitHub Repository:
+## Repostory / Deployment
 
 >[github repository](https://github.com/crisdc88/H6-WEATHER-INFO)
+
+>[deployed URL: https://crisdc88.github.io/H5-WD-SCHEDULER/](https://dcristinaterry.github.io/WEATHER-INFO/)
 
 ## Technologies Used
 
@@ -20,10 +20,6 @@ GitHub Repository:
 * Bootstrap
 * jQuery
 * Ajax
-
-## Deployed Link
-
->[deployed URL: https://crisdc88.github.io/H5-WD-SCHEDULER/](https://dcristinaterry.github.io/WEATHER-INFO/)
 
 ## Leasons Learned / Code-Snippets
 
