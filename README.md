@@ -8,9 +8,9 @@ Thank you for visiting my Weather-App.  With this application you will be able t
 
 ## Repostory / Deployment
 
->[github repository](https://github.com/crisdc88/H6-WEATHER-INFO)
+>[github repository](https://github.com/dcristinaterry/H6-WEATHER-INFO)
 
->[deployed URL: https://crisdc88.github.io/H5-WD-SCHEDULER/](https://dcristinaterry.github.io/WEATHER-INFO/)
+>[deployed URL: https://dcristinaterry.github.io/H5-WD-SCHEDULER/](https://dcristinaterry.github.io/WEATHER-INFO/)
 
 ## Technologies Used
 
